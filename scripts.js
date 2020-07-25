@@ -160,7 +160,7 @@ window.setInterval(function show() {
             
             
         }else if(document.getElementsByClassName("brick")[i].brickHealth < 0){
-            document.getElementsByClassName("brick")[i].brickHealth = 0;
+            document.getElementsByClassName("brick")[i].brickHealth = 5;
         }
     }
     if(ballPosY <= 0){
@@ -197,5 +197,5 @@ window.setInterval(function show() {
 
 
 for (var i = 0; i < 24; i++) {
-    document.getElementsByClassName("brick")[i].brickHealth = 1;
+    document.getElementsByClassName("brick")[i].brickHealth = 5;
 }
