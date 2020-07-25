@@ -1,0 +1,73 @@
+.border{
+    position:fixed;
+
+    padding:0;
+    margin:0;
+
+    top:0;
+    left:0;
+
+    width: 100%;
+    height: 100%;
+    background:black;
+}
+ 
+#brickfield{
+    position: absolute;
+    top: 100px;
+
+    padding: 0 10px;
+
+}
+.brick{
+    position: relative;
+    display: inline-block;
+    margin: 2px 2px;
+    width: 163px;
+    height: 40px;
+    float: left;
+    background-color: FireBrick;   
+}
+
+#ball{
+    position: absolute;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    background: red;
+}
+
+#paddle{
+    position: absolute;
+    top: 600px;
+    width: 200px;
+    height: 16px;
+    background: lightskyblue;   
+}
+
+#HUD > h1{
+    color: white;
+    display: inline-block;
+    margin-right: 30px;
+    margin-left: 30px;
+
+}
+
+#Lives{
+    float:center;
+}
+
+#Lives{
+    float: right;
+}
+
+
+#gos{
+    position: absolute;
+    display: none;
+    color: white;
+    text-align: center;
+    width: 160px;
+    height: 115px;
+    
+}
