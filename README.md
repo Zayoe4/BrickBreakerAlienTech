@@ -1,4 +1,4 @@
-# BrickBreakerAlienTech (Five Day Challenge)
+# BrickBreakerAlienTech (Five Day Challenge w/Beta Branch)
 This is the classic, Brick Breaker, but with a twist.
 
 Sentient alien brick have invaded Earth. They are attempting to terraform Earth into a Minecraft clone (the horror). Fortunately, The UN had a contingency plan in place for this very event. Man your keyboard, because all your years of gaming have trained you for this very moment!
