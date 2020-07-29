@@ -8,7 +8,11 @@
     <title>Brick Breaker, now with 20% More Bricks</title>
 </head>
 <body>
-    <div class="border">
+    <div id= "start">
+        <h1>PRESS RIGHT OR LEFT ARROW KEY TO START</h1>
+        <h1 id="countdown">3</h1> 
+    </div>
+    <div id="border">
         <div id="HUD">
             <h1 id="Score">Score: 0</h1>
             <h1 id="Wins">Wins: 0</h1>
@@ -17,14 +21,15 @@
         <div id="brickfield">
             <div class="brick"></div>
         </div>
-        <div id="ball"></div>
-        <div id="paddle"></div>
+        <div class="ball"></div>
+        <div id="paddle">
+        </div>
         <div id="gos">
             <h1>Game Over</h1>
             <p>Press F5 to try again.</p>
-        </div>
-        
+        </div>        
     </div>
-    <script type="text/javascript" src="scripts.js"></script>
+    
+    <script type="text/javascript" src="scriptsBeta.js"></script>
 </body>
 </html>
