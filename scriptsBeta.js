@@ -30,7 +30,7 @@ gos.style.left = (window.innerWidth/2) - (260/2) + "px";
 var gameOverBool = false;
 var startGameBool = false;
 document.addEventListener('keydown', function (e) {
-    if (e.keyCode == '39' || e.keyCode == '37' ) {
+    if (e.key == 'ArrowRight' || e.key == 'ArrowLeft' ) {
         startGameBool = true;
         start.style.visibility = 'hidden';
         border.style.visibility = 'visible';
@@ -76,18 +76,18 @@ function winConditionCheck(){
 
 //Checks to see if Game is over.
 function gameOverCheck(ballNumber){
-    ball[ballNumber].ballSpeedX = 0;
-    ball[ballNumber].ballSpeedY = 0;
+    ballNumber.ballSpeedX = 0;
+    ballNumber.ballSpeedY = 0;
     playerLives -= 1;
 
     if(playerLives < 1){
         Lives.innerHTML = playerLives+' Lives Left';
         gos.style.display = "inline";
-        ball[ballNumber].style.visibility = "hidden";
-        ball[ballNumber].remove();
+        ballNumber.style.visibility = "hidden";
+        ballNumber.remove();
     }else{
-        ball[ballNumber].ballPosX = (window.innerWidth/2) - ballRadius; //Middle of the screen
-        ball[ballNumber].ballPosY = paddle.offsetTop - (ballRadius*2) -2;
+        ballNumber.ballPosX = (window.innerWidth/2) - ballRadius; //Middle of the screen
+        ballNumber.ballPosY = paddle.offsetTop - (ballRadius*2) -2;
         paddlePosX = (window.innerWidth/2)-(paddleWidth/2);
         
 }
@@ -121,16 +121,16 @@ function updateBricks(ballNumber){
         var leftOfBrick = brickClass[i].offsetLeft;
         var rightOfBrick = leftOfBrick + brickWidth;
         var bottomOfBrick = topOfBrick + brickHeight;
-        var topOfBall = ball[ballNumber].ballPosY;
-        var leftOfBall = ball[ballNumber].ballPosX;
+        var topOfBall = ballNumber.ballPosY;
+        var leftOfBall = ballNumber.ballPosX;
         var rightOfBall = leftOfBall + (ballRadius*2);
-        var bottomOfBall = ball[ballNumber].ballPosY + (ballRadius*2);
+        var bottomOfBall = ballNumber.ballPosY + (ballRadius*2);
         var brickVisCount = 0;
 
 
         if((topOfBall <= bottomOfBrick && bottomOfBall >= bottomOfBrick) && brickClass[i].style.visibility != "hidden"){
             if(leftOfBrick - ballRadius <=leftOfBall && rightOfBrick + ballRadius >= rightOfBall){
-                ball[ballNumber].ballSpeedY = -ball[ballNumber].ballSpeedY;
+                ballNumber.ballSpeedY = -ballNumber.ballSpeedY;
                 brickClass[i].brickHealth = brickClass[i].brickHealth - 1;
                 brickClass[i].style["background-color"] = brickColor[brickClass[i].brickHealth];
                 continue;
@@ -138,7 +138,7 @@ function updateBricks(ballNumber){
         }
         if((bottomOfBall >= topOfBrick && !(topOfBall >= topOfBrick)) && brickClass[i].style.visibility != "hidden"){
             if(leftOfBrick - ballRadius <=leftOfBall && rightOfBrick + ballRadius >= rightOfBall){
-                ball[ballNumber].ballSpeedY = -ball[ballNumber].ballSpeedY;
+                ballNumber.ballSpeedY = -ballNumber.ballSpeedY;
                 brickClass[i].brickHealth = brickClass[i].brickHealth - 1;
                 brickClass[i].style["background-color"] = brickColor[brickClass[i].brickHealth];
                 continue;
@@ -146,7 +146,7 @@ function updateBricks(ballNumber){
         }
         if((leftOfBall <= rightOfBrick && rightOfBall >= rightOfBrick) && brickClass[i].style.visibility != "hidden" ){
             if(topOfBall >= (topOfBrick - ballRadius) && bottomOfBall <= (bottomOfBrick + ballRadius)){
-                ball[ballNumber].ballSpeedX = -ball[ballNumber].ballSpeedX;
+                ballNumber.ballSpeedX = -ballNumber.ballSpeedX;
                 brickClass[i].brickHealth = brickClass[i].brickHealth - 1;
                 brickClass[i].style["background-color"] = brickColor[brickClass[i].brickHealth];
                 continue;
@@ -154,7 +154,7 @@ function updateBricks(ballNumber){
         }
         if((rightOfBall >= leftOfBrick && leftOfBall <= leftOfBrick) && brickClass[i].style.visibility != "hidden" ){
             if(topOfBall >= (topOfBrick - ballRadius) && bottomOfBall <= bottomOfBrick + ballRadius){
-                ball[ballNumber].ballSpeedX = -ball[ballNumber].ballSpeedX;
+                ballNumber.ballSpeedX = -ballNumber.ballSpeedX;
                 brickClass[i].brickHealth = brickClass[i].brickHealth - 1;
                 brickClass[i].style["background-color"] = brickColor[brickClass[i].brickHealth];
                 continue;
@@ -173,9 +173,9 @@ function updateBricks(ballNumber){
 function updatePaddle(ballNumber){
     paddlePosX += paddleSpeedX/ball.length;
     //Ball-Paddle Collision
-    if( ball[ballNumber].ballPosY + (ballRadius*2) >= paddle.offsetTop && ball[ballNumber].ballPosY <= paddle.offsetTop){
-        if(ball[ballNumber].ballPosX > paddlePosX-10 && ball[ballNumber].ballPosX < paddlePosX + paddleWidth + 10){
-            ball[ballNumber].ballSpeedY = -ball[ballNumber].ballSpeedY;
+    if( ballNumber.ballPosY + (ballRadius*2) >= paddle.offsetTop && ballNumber.ballPosY <= paddle.offsetTop){
+        if(ballNumber.ballPosX > paddlePosX-10 && ballNumber.ballPosX < paddlePosX + paddleWidth + 10){
+            ballNumber.ballSpeedY = -ballNumber.ballSpeedY;
         }
     }
     //Border Collisions for Paddles
@@ -190,7 +190,7 @@ function updatePaddle(ballNumber){
 
 //Listens for keypresses, and adjusts paddle speed accordingly
 document.addEventListener('keydown', function (e) {
-    if (e.keyCode == '80') {            
+    if (e.key == 'p') {            
         cloneBall(ball.length-1);
         console.log("Ninja Clone Juitsu number "+ ball.length-1);
     }
@@ -199,64 +199,64 @@ document.addEventListener('keydown', function (e) {
 
 document.addEventListener('keydown', function (e) {
     if(startGameBool){
-        if (e.keyCode == '37') {      // left arrow
-            paddleSpeedX = -14; 
+        if (e.key == 'ArrowLeft') {     
+            paddleSpeedX = -7; 
         }
-        else if (e.keyCode == '39') { // right arrow
-            paddleSpeedX = 14 ; 
+        else if (e.key == 'ArrowRight') {
+            paddleSpeedX = 7 ; 
         }
     }
     
 }, false);
 document.addEventListener('keyup', function (e) {
-    if (e.keyCode == '37') {            
+    if (e.key == 'ArrowLeft') {            
         paddleSpeedX = 0; 
     }
-    else if (e.keyCode == '39') {           
+    else if (e.key == 'ArrowRight') {           
         paddleSpeedX = 0; 
     }
 }, false);
 //Update Ball
 function updateBall(ballNumber){
     //Sets Ball Speed to Paddle Speed
-    if(ball[ballNumber].ballSpeedX == 0){
-        ball[ballNumber].ballSpeedX = paddleSpeedX/2;
-        ball[ballNumber].ballSpeedY = paddleSpeedX/2;
+    if(ballNumber.ballSpeedX == 0){
+        ballNumber.ballSpeedX = paddleSpeedX/4;
+        ballNumber.ballSpeedY = paddleSpeedX/4;
 
     }
-    ball[ballNumber].ballPosX += ball[ballNumber].ballSpeedX;
-    ball[ballNumber].ballPosY += ball[ballNumber].ballSpeedY;
-    ball[ballNumber].style.left  = (ball[ballNumber].ballPosX)+"px";
-    ball[ballNumber].style.top  = (ball[ballNumber].ballPosY)+"px"
+    ballNumber.ballPosX += ballNumber.ballSpeedX;
+    ballNumber.ballPosY += ballNumber.ballSpeedY;
+    ballNumber.style.left  = (ballNumber.ballPosX)+"px";
+    ballNumber.style.top  = (ballNumber.ballPosY)+"px"
 }
 //Ball Shadow Clone Jitsu
 function cloneBall(ballNumber){
-    var ball2 = ball[ballNumber].cloneNode(true);
-    border.appendChild(ball2);
-    ball[ballNumber+1].ballSpeedX = - ball[ballNumber].ballSpeedX;
-    ball[ballNumber+1].ballSpeedY = - ball[ballNumber].ballSpeedY;
-    ball[ballNumber+1].ballPosX = ball[ballNumber].ballPosX;
-    ball[ballNumber+1].ballPosY = ball[ballNumber].ballPosY;
+    // var ball2 = ballNumber.cloneNode(true);
+    // border.appendChild(ball2);
+    // ball2Number.ballSpeedX = - ballNumber.ballSpeedX;
+    // ball2.ballSpeedY = - ballNumber.ballSpeedY;
+    // ball2.ballPosX = ballNumber.ballPosX;
+    // ball2.ballPosY = ballNumber.ballPosY;  
 }
 
 //FrameRate
 window.setInterval(function show() {    
     
     Lives.innerHTML = playerLives +' Lives Left';
-    for (let i = 0; i < ball.length; i++) {
+    for (const i of ball) {
         //Border Collisions for Ball
-        if(ball[i].ballPosX >= (window.innerWidth - (ballRadius*2))){
-            ball[i].ballSpeedX = -ball[i].ballSpeedX;
+        if(i.ballPosX >= (window.innerWidth - (ballRadius*2))){
+            i.ballSpeedX = -i.ballSpeedX;
         }
-        else if(ball[i].ballPosX <= 0){
-            ball[i].ballSpeedX = -ball[i].ballSpeedX;
+        else if(i.ballPosX <= 0){
+            i.ballSpeedX = -i.ballSpeedX;
         }
-        if(ball[i].ballPosY <= 0){
-            ball[i].ballSpeedY = -ball[i].ballSpeedY;
+        if(i.ballPosY <= 0){
+            i.ballSpeedY = -i.ballSpeedY;
         }
-        if(ball[i].ballPosY >= (window.innerHeight - (ballRadius*2))){
+        if(i.ballPosY >= (window.innerHeight - (ballRadius*2))){
             if(ball.length > 1){
-                ball[i].remove();
+                i.remove();
                 break;
             }
             gameOverCheck(i);
@@ -264,12 +264,12 @@ window.setInterval(function show() {
         updateBall(i);
         updateBricks(i);
         updatePaddle(i);
-        winConditionCheck(i);
-        updatePowerUp();
-        powerUpCollisionDetection();
     }
+    winConditionCheck();
+    updatePowerUp();
+    powerUpCollisionDetection();
     
-}, 1000/60);
+}, 1000/120);
 
 
 function positionPowerUp(){
@@ -289,7 +289,7 @@ function positionPowerUp(){
 }
  
 function clonePowerUp(count){
-    for (let x = 0; x < 4; x++) {  //change x < 2 to number of powerups you desire
+    for (let x = 0; x < 20; x++) {  //change x < 2 to number of powerups you desire
         var powerUpType = document.getElementsByClassName(count)
         var powerUpMaker = powerUpType[x];
         var powerUpBaker = powerUpMaker.cloneNode(true);
@@ -305,7 +305,12 @@ function updatePowerUp(){
 
         if(targetPower[i].brickNumber.style.visibility == 'hidden'){
             powerUp.children[i].gravity = 1;
+            console.log("You just unlocked a powerup!")
             powerUp.children[i].style.zIndex = 3;
+        }
+
+        if(powerUp.children[i].posY >= window.innerHeight){
+            powerUp.children[i].remove();
         }
     }
 }
@@ -315,7 +320,7 @@ function powerUpCollisionDetection(){
         var targetPower = powerUp.children;
         var bottomOfPowerUp = powerUp.children[i].posY + targetPower[i].offsetHeight;
         var leftOfPowerUp = powerUp.children[i].posX;
-        var rightOfPowerUp =  leftOfPowerUp + powerUp.children[1].offsetWidth;
+        var rightOfPowerUp =  leftOfPowerUp + powerUp.children[i].offsetWidth;
         //PowerUp Collision
         if( bottomOfPowerUp >= paddle.offsetTop && powerUp.children[i].posY <= paddle.offsetTop){
             if((rightOfPowerUp > paddlePosX && rightOfPowerUp < paddlePosX + paddleWidth) || 
@@ -338,6 +343,7 @@ function powerUpCollisionDetection(){
                         }
                         break;
                     default:
+                        console.log("Error: Something Something Stack Overflows");
                         break;
                 }
             }
