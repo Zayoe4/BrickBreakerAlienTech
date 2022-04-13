@@ -30,4 +30,4 @@ This game runs on Javascript which runs on nearly all modern web browsers. The o
 3) Double Click on the Brickbreaker.html
 
 ## Technologies Used
-1) Javascript
+1) Javascript, HTML, and CSS
